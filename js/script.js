@@ -1,19 +1,20 @@
 console.log("Northwood Care Website Loaded");
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbzLmBKwHNtGHd0B8RabJSFdUx7lQ6LlbXaPZ79dbcWXaX3JN2keNOehvaOVcBbA4RNL/exec";
+const scriptURL =
+  "https://script.google.com/macros/s/AKfycbzLmBKwHNtGHd0B8RabJSFdUx7lQ6LlbXaPZ79dbcWXaX3JN2keNOehvaOVcBbA4RNL/exec";
 
-const contactForm = document.getElementById("contactForm");
+const contactForm =
+  document.getElementById("contactForm");
 
 if (contactForm) {
   contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const submitButton = contactForm.querySelector("button[type='submit']");
+    const submitButton =
+      contactForm.querySelector("button[type='submit']");
 
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = "Sending...";
-    }
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
 
     fetch(scriptURL, {
       method: "POST",
@@ -24,21 +25,29 @@ if (contactForm) {
       })
       .then(function (data) {
         if (data.result === "success") {
-          alert("Thank you! Your message has been sent.");
+          submitButton.textContent = "Sent ✓";
+          submitButton.style.backgroundColor = "#1f7a3e";
+
           contactForm.reset();
+
+          setTimeout(function () {
+            submitButton.disabled = false;
+            submitButton.textContent = "Send Message";
+            submitButton.style.backgroundColor = "";
+          }, 4000);
         } else {
-          alert("Error: " + data.message);
+          submitButton.disabled = false;
+          submitButton.textContent = "Send Message";
+          alert("Failed to send message.");
         }
       })
       .catch(function (error) {
         console.error("Error:", error);
-        alert("Failed to send message. Please try again.");
-      })
-      .finally(function () {
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = "Send Message";
-        }
+
+        submitButton.disabled = false;
+        submitButton.textContent = "Send Message";
+
+        alert("Failed to send message.");
       });
   });
 }
