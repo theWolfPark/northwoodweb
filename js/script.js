@@ -1,6 +1,6 @@
 console.log("Northwood Care Website Loaded");
 
-const scriptURL = "Yhttps://script.google.com/a/macros/northwoodcare.com/s/AKfycbzLmBKwHNtGHd0B8RabJSFdUx7lQ6LlbXaPZ79dbcWXaX3JN2keNOehvaOVcBbA4RNL/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbzLmBKwHNtGHd0B8RabJSFdUx7lQ6LlbXaPZ79dbcWXaX3JN2keNOehvaOVcBbA4RNL/exec";
 
 const contactForm = document.getElementById("contactForm");
 
